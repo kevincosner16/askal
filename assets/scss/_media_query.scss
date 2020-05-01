@@ -1,0 +1,567 @@
+//
+//  MEDIA QUERIES
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// A map of breakpoints.
+$breakpoints: (380: 380px,
+    460: 460px,
+    576: 576px,
+    992: 992px,
+    1280: 1280px,
+    1400: 1400px,
+    1600: 1600px,
+    1920: 1920px);
+
+
+//
+//  RESPOND ABOVE
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-above(sm) {}
+@mixin respond-above($breakpoint) {
+
+    // If the breakpoint exists in the map.
+    @if map-has-key($breakpoints, $breakpoint) {
+
+        // Get the breakpoint value.
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+        // Write the media query.
+        @media (min-width: $breakpoint-value) {
+            @content;
+        }
+
+        // If the breakpoint doesn't exist in the map.
+    }
+
+    @else {
+
+        // Log a warning.
+        @warn 'Invalid breakpoint: #{$breakpoint}.';
+    }
+}
+
+
+//
+//  RESPOND BELOW
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-below(sm) {}
+@mixin respond-below($breakpoint) {
+
+    // If the breakpoint exists in the map.
+    @if map-has-key($breakpoints, $breakpoint) {
+
+        // Get the breakpoint value.
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+        // Write the media query.
+        @media (max-width: ($breakpoint-value - 1)) {
+            @content;
+        }
+
+        // If the breakpoint doesn't exist in the map.
+    }
+
+    @else {
+
+        // Log a warning.
+        @warn 'Invalid breakpoint: #{$breakpoint}.';
+    }
+}
+
+
+//
+//  RESPOND BETWEEN
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-between(sm, md) {}
+@mixin respond-between($lower, $upper) {
+
+    // If both the lower and upper breakpoints exist in the map.
+    @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+
+        // Get the lower and upper breakpoints.
+        $lower-breakpoint: map-get($breakpoints, $lower);
+        $upper-breakpoint: map-get($breakpoints, $upper);
+
+        // Write the media query.
+        @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+            @content;
+        }
+
+        // If one or both of the breakpoints don't exist.
+    }
+
+    @else {
+
+        // If lower breakpoint is invalid.
+        @if (map-has-key($breakpoints, $lower)==false) {
+
+            // Log a warning.
+            @warn 'Your lower breakpoint was invalid: #{$lower}.';
+        }
+
+        // If upper breakpoint is invalid.
+        @if (map-has-key($breakpoints, $upper)==false) {
+
+            // Log a warning.
+            @warn 'Your upper breakpoint was invalid: #{$upper}.';
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------
+Askal Media Query 
+-------------------------------------------------------------------------- */
+
+/* Above | Must be write from bottom to top*/
+@include respond-above(992) {
+    .card-mentor {
+        img {
+            width: unset !important;
+        }
+    }
+}
+
+@include respond-above(1280) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@include respond-above(1400) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+@include respond-above(1600) {
+    .container {
+        max-width: 1460px;
+    }
+
+    .container-fluid {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .custom-offset {
+        margin-left: 10.5%;
+    }
+}
+
+
+/* Below */
+@include respond-below(1600) {
+
+    .text-home {
+        h1 {
+            font-size: 45px;
+        }
+    }
+}
+
+@include respond-below(1400) {
+    .custom-offset {
+        margin-left: 9.5%;
+    }
+
+    .card-support {
+        width: 330px;
+
+        .card-title-block {
+            img {
+                width: unset;
+            }
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .card-how {
+        .card-title {
+            h5 {
+                font-size: 22px;
+            }
+
+            img {
+                width: unset;
+            }
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .question {
+        p {
+            width: 80%;
+        }
+    }
+}
+
+@include respond-below(1280) {
+    .card-support {
+        margin: 0 15px;
+    }
+
+    .custom-offset {
+        margin-left: 6.5%;
+    }
+
+    #home::before {
+        left: -43%;
+        bottom: -303px;
+    }
+
+    #home::after {
+        right: -50%;
+        top: -52%;
+    }
+
+    #support-bg {
+        right: -50%;
+        top: -20%;
+    }
+}
+
+
+
+@include respond-below(992) {
+
+    .how-wrapper,
+    .support-wrapper,
+    .question-wrapper,
+    .latest-question-wrapper,
+    .meet-mentor-wrapper,
+    .premium-wrapper {
+        padding: 100px 0;
+    }
+
+    %sub-heading {
+        p {
+            margin-top: 50px;
+        }
+    }
+
+    .h-header {
+        height: auto;
+    }
+
+    .header-poster {
+        img {
+            float: none;
+        }
+    }
+
+    .header-wrapper {
+        padding: 120px 0 100px;
+    }
+
+    .how-left {
+        @extend %sub-heading;
+
+        h2 {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    .support {
+        @extend %sub-heading;
+    }
+
+    .question {
+        @extend %sub-heading;
+    }
+
+    .latest-question {
+        @extend %sub-heading;
+    }
+
+    .meet-mentor {
+        @extend %sub-heading;
+    }
+
+    .premium-left {
+        @extend %sub-heading;
+    }
+
+    .how-right {
+        margin-top: 50px;
+    }
+
+    .card-how {
+        margin-bottom: 50px;
+    }
+
+    .how-1,
+    .how-2 {
+        &:nth-child(1) {
+            &::after {
+                display: none;
+                visibility: hidden;
+            }
+        }
+    }
+
+    .custom-offset {
+        margin-left: 14.5%;
+    }
+
+    .col-reverse {
+        flex-direction: column-reverse !important;
+    }
+
+    .premium-left {
+        p {
+            margin-top: 20px;
+
+        }
+    }
+
+    .premium-right {
+        margin: 0;
+        margin-bottom: 50px;
+    }
+
+    .footer-wrapper {
+        .footer-col-wrapper {
+            float: none;
+        }
+    }
+
+    .footer-wrapper {
+        img {
+            margin-bottom: 20px;
+        }
+    }
+
+    .footer-wrapper {
+
+        .copyright {
+            padding-top: 0;
+            display: flex;
+            flex-direction: column-reverse;
+
+            .link {
+                text-align: center;
+                display: block;
+
+                ul#rule {
+                    padding-right: 0;
+                    display: block;
+                    margin: 50px 0 15px;
+                }
+
+                #social-media {
+                    li {
+                        a {
+                            &:last-child {
+                                padding: 0 20px;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            span {
+                text-align: center;
+                display: block;
+            }
+        }
+    }
+
+    .card-support {
+        margin: 20px 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .justify-element {
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .card-mentor {
+        margin: 60px 20px;
+    }
+
+    #premium-triangle {
+        right: -70%;
+        top: 15%;
+    }
+
+    #premium-dot {
+        top: 265%;
+        right: 8%;
+    }
+
+    .navbar-nav {
+        margin-top: 30px;
+    }
+
+    .nav-link {
+        text-align: center;
+    }
+}
+
+@include respond-below(576) {
+    .premium-right {
+        img {
+            width: 100%;
+        }
+    }
+
+    .header-poster {
+        img {
+            margin: 50px 0;
+        }
+    }
+
+    .custom-offset {
+        margin: 0;
+    }
+
+    .no-padding {
+        padding: 0 15px;
+    }
+
+    #askal-latest-question::before {
+        right: 0;
+    }
+
+    .card-question-wrapper {
+        margin-top: 50px;
+    }
+
+    .card-question {
+        box-shadow: none;
+        margin-bottom: 30px;
+    }
+
+    .premium-left {
+        h4 {
+            width: 100%;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
+
+    .text-home {
+        h1 {
+            font-size: 60px;
+        }
+    }
+
+    .header-wrapper {
+        padding: 120px 0 200px;
+    }
+
+    .how-wrapper {
+        padding-top: 0;
+    }
+
+    .header-poster {
+        img {
+            margin: 100px 0;
+            width: 100%;
+        }
+    }
+
+    #home::before,
+    #home::after,
+    #dotHeader,
+    .mentor-mobile,
+    #latest-question-dot,
+    #meet-mentor-dot,
+    #support-bg,
+    #support-dot,
+    #premium-triangle {
+        display: none;
+    }
+
+    .footer-wrapper {
+        .copyright {
+            .link {
+                #rule {
+                    a {
+                        padding: 0 30px;
+                    }
+                }
+            }
+        }
+    }
+
+    .justify-element {
+        margin-top: 20px;
+    }
+}
+
+@include respond-below(460) {
+
+    .how-left p,
+    .support p,
+    .latest-question p,
+    .meet-mentor p,
+    .premium-left p,
+    .question p {
+        width: 100%;
+    }
+
+    .text-home {
+        h1 {
+            font-size: 50px;
+        }
+    }
+
+    .card-question {
+        .answer-point {
+            flex-flow: column-reverse;
+
+            span {
+                padding-left: 0;
+                padding-bottom: 10px;
+            }
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .card-title {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+
+            #dot-tosca,
+            #dot-orange,
+            #dot-blue,
+            #dot-purple {
+                margin: 0;
+            }
+
+            h5 {
+                padding: 15px 0 5px;
+
+            }
+        }
+    }
+
+    .owl-carousel {
+        .owl-item {
+            img {
+                margin: 0 !important;
+            }
+        }
+    }
+}
