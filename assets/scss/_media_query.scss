@@ -202,6 +202,11 @@ Askal Media Query
             width: 80%;
         }
     }
+
+    #home::before,
+    #home::after {
+        display: none;
+    }
 }
 
 @include respond-below(1280) {
@@ -478,8 +483,6 @@ Askal Media Query
         }
     }
 
-    #home::before,
-    #home::after,
     #dotHeader,
     .mentor-mobile,
     #latest-question-dot,

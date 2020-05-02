@@ -336,8 +336,8 @@ $(document).ready(function () {
 $(document).ready(function () {
    var getUrl = window.location;
    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-   var white = baseUrl + 'assets/images/logo-white.svg';
-   var color = baseUrl + 'assets/images/logo-dark.svg';
+   var white = baseUrl + '/assets/images/logo-white.svg';
+   var color = baseUrl + '/assets/images/logo-dark.svg';
    $(window).on('scroll', function () {
       var scroll = $(window).scrollTop();
       if (scroll < 150) {

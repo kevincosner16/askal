@@ -1105,7 +1105,11 @@ Askal Media Query
     font-size: 18px; }
 
   .question p {
-    width: 80%; } }
+    width: 80%; }
+
+  #home::before,
+  #home::after {
+    display: none; } }
 @media (max-width: 1279px) {
   .card-support {
     margin: 0 15px; }
@@ -1265,8 +1269,6 @@ Askal Media Query
     margin: 100px 0;
     width: 100%; }
 
-  #home::before,
-  #home::after,
   #dotHeader,
   .mentor-mobile,
   #latest-question-dot,
